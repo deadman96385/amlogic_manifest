@@ -14,11 +14,26 @@
 <project name="bootloader_uboot-repo_bl31_bin" path="bootloader/uboot-repo/bl31_1.3/bin" remote="gitlab" />
 <project name="bootloader_uboot-repo_bl32_bin" path="bootloader/uboot-repo/bl32/bin" remote="gitlab" />
 <project name="bootloader_uboot-repo_bl33" path="bootloader/uboot-repo/bl33" remote="gitlab" />
-<project name="bootloader_uboot-repo_fip" path="bootloader/uboot-repo/fip"  remote="gitlab" />>
+<project name="bootloader_uboot-repo_fip" path="bootloader/uboot-repo/fip"  remote="gitlab" >
+    <copyfile dest="bootloader/uboot-repo/mk" src="mk"/>
+ </project>
+
 <project name="build_blueprint" path="build/blueprint" remote="gitlab" />
 <project name="build_kati" path="build/kati" remote="gitlab" />
-<project name="build_make" path="build/make" remote="gitlab" />
-<project name="build_soong" path="build/soong" remote="gitlab" />
+<project name="build_make" path="build/make" remote="gitlab">
+    <copyfile dest="Makefile" src="core/root.mk"/>
+    <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>
+    <linkfile dest="build/buildspec.mk.default" src="buildspec.mk.default"/>
+    <linkfile dest="build/core" src="core"/>
+    <linkfile dest="build/envsetup.sh" src="envsetup.sh"/>
+    <linkfile dest="build/target" src="target"/>
+    <linkfile dest="build/tools" src="tools"/>
+  </project>
+<project name="build_soong" path="build/soong" remote="gitlab">
+    <linkfile dest="Android.bp" src="root.bp"/>
+    <linkfile dest="bootstrap.bash" src="bootstrap.bash"/>
+  </project>
+
 <project name="common" path="common" remote="gitlab" />
 <project name="compatibility_cdd" path="compatibility/cdd" remote="gitlab" />
 <project name="cts" path="cts" remote="gitlab" />
